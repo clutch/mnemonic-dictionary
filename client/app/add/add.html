@@ -1,0 +1,38 @@
+<div id="add">
+    <md-toolbar class="md-theme-light" style="height:48px; min-height:48px">
+        <h1 class="md-toolbar-tools">
+            <span ng-click="cancel()"><md-button>Cancel</md-button></span>
+            <span class="screen-header">Add Set</span>
+            <span ng-click="done()" style="position:relative;left:50px"><md-button>Done</md-button></span>
+        </h1>
+    </md-toolbar>
+    <md-content>
+        <md-list>
+            <md-item ng-repeat="item in dictionary.items" ng-click="review(item)">
+                <md-item-content>
+                    <div class="md-tile-content" style="padding:20px">
+                        <span class="input-label">Word:</span>
+                        <input tyle="text" ng-model="item.word" />
+                        <br>
+                        <span class="input-label">Pron:</span>
+                        <input tyle="text" ng-model="item.pronunciation" />
+                        <br>
+                        <span class="input-label">Defi:</span>
+                        <input tyle="text" ng-model="item.definition" />
+                        <br>
+                        <span class="input-label">Keys:</span>
+                        <input tyle="text" ng-model="item.keys" />
+                        <br>
+                        <span class="input-label">Link:</span>
+                        <input tyle="text" ng-model="item.link" />
+                        <br>
+                    </div>
+                </md-item-content>
+                <md-divider xng-if="!$last"></md-divider>
+            </md-item>
+        </md-list>
+    </md-content>
+    <div layout="column" layout-align="center center" class="footer-button">
+        <md-button class="md-raised md-primary" ng-click="done()">Done</md-button>
+    </div>
+</div>

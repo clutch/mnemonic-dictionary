@@ -1,0 +1,42 @@
+<div id="view">
+    <md-toolbar class="md-theme-light" style="height:48px; min-height:48px">
+        <h1 class="md-toolbar-tools">
+            <span ng-click="back()"><i class="fa fa-chevron-left"></i></span>
+            <span class="screen-header">View Set</span>
+        </h1>
+    </md-toolbar>
+    <div layout="row" layout-align="center center" ng-if="loading" style="padding:20px">
+      <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    </div>
+    <md-content ng-if="!loading">
+        <md-list>
+            <md-list-item ng-repeat="item in dictionary.items">
+                <div class="md-list-item-text">
+                    <h3>
+                        {{item.word}}
+                        <span style="opacity:{{(item.visible !== true) ? 0 : 1}}" ng-if="item.pronunciation">({{item.pronunciation}})</span>
+                    </h3>
+                    <span style="opacity:{{(item.visible !== true) ? 0 : 1}}">
+                      {{item.definition}}<br>
+                      <b>Key:</b> {{item.keys}}<br>
+                      <b>Link:</b> <span ng-bind-html='item.link'></span>
+                    </span>
+                </div>
+                <div class="md-secondary"  style="font-size:45px">
+                  <i class="fa fa-close pull-right" style="color:red" ng-click="remove(item)"></i>
+                  <i class="fa fa-eye pull-right" ng-if="item.visible !== true" ng-click="item.visible = !item.visible"></i>
+                  <i class="fa fa-eye-slash pull-right" ng-if="item.visible === true" ng-click="item.visible = !item.visible"></i>
+                </div>
+                <md-divider xng-if="!$last"></md-divider>
+            </md-list-item>
+        </md-list>
+        <md-button ng-click="save()" class="md-primary" style="width:100%;padding:25px" ng-if="edited">
+            <span ng-if="!saving">Update</span>
+            <span ng-if="saving">Updating...</span>
+        </md-button>
+        <md-button ng-click="delete()" class="md-warn" style="width:100%;padding:25px">
+            <span ng-if="!saving">Delete Set</span>
+            <span ng-if="saving">Deleting...</span>
+        </md-button>
+    </md-content>
+</div>

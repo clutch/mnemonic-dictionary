@@ -1,0 +1,84 @@
+<div id="review" ng-if="reviewing">
+    <md-toolbar class="md-theme-light" style="height:48px; min-height:48px">
+        <h1 class="md-toolbar-tools">
+            <span ng-click="back()"><i class="fa fa-chevron-left"></i></span>
+            <span class="screen-header">Review Set</span>
+            <!--span ng-click="grade()" style="position:relative;left:50px"><md-button>Grade</md-button></span-->
+        </h1>
+    </md-toolbar>
+    <div layout="row" layout-align="center center" ng-if="loading" style="padding:20px">
+      <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    </div>
+    <md-content ng-if="!loading">
+        <md-list>
+            <md-item ng-repeat="item in dictionary.items">
+                <md-item-content>
+                    <div class="md-tile-content reviewing">
+                        <h3>{{item.word}}</h3>
+                        <input ng-model="item.test" tyle="text" />
+                    </div>
+                </md-item-content>
+                <md-divider xng-if="!$last"></md-divider>
+            </md-item>
+        </md-list>
+        <md-button ng-click="grade()" class="md-primary" style="width:100%;padding:25px">
+                    Grade
+        </md-button>
+    </md-content>
+</div>
+<div id="grade" ng-if="!reviewing">
+    <md-toolbar class="md-theme-light" style="height:48px; min-height:48px">
+        <h1 class="md-toolbar-tools">
+            <span class="screen-header">Grade Set</span>
+            <span ng-click="save()" style="position:relative;left:50px" ng-disabled="saving">
+                <md-button>
+                    <span ng-if="!saving">Fail</span>
+                    <span ng-if="saving">Saving...</span>
+                </md-button>
+            </span>
+        </h1>
+    </md-toolbar>
+    <md-content>
+        <md-list>
+            <md-item ng-repeat="item in dictionary.items">
+                <md-item-content class="item-content">
+                    <div layout="row" layout-align="start center" class="item-content-layout">
+                        <div class="item-checkbox" style="width:100px;padding-right:20px">
+                            <md-checkbox ng-model="item.ok" ng-change="checked($event)">
+                                <b>{{item.word}}</b>
+                            </md-checkbox>
+                        </div>
+                        <div class="item-compare" style="width:100%;padding-left:40px">
+                            {{item.test}}
+                            <br> {{item.definition}}
+                        </div>
+                        <div class="item-info" ng-click="info(item)" style="font-size:40px;width:100px;padding-right:20px">
+                            <i class="fa fa-info-circle"></i>
+                        </div>
+                    </div>
+                </md-item-content>
+                <md-divider xng-if="!$last"></md-divider>
+            </md-item>
+        </md-list>
+        <md-button ng-click="done()" class="md-primary" style="width:100%;padding:25px" ng-disabled="saving">
+                    <span ng-if="!saving">{{doneLabel}}</span>
+                    <span ng-if="saving">Saving...</span>
+        </md-button>
+    </md-content>
+</div>
+
+<script type="text/ng-template" id="info-template.html">
+    <md-dialog>
+        <md-content>
+            <b>{{item.word}}</b> <span ng-if="item.pronunciation">({{item.pronunciation}})</span><br>
+            {{item.definition}}<br>
+            <b>Key:</b> {{item.keys}}<br> 
+            <b>Link:</b> <span ng-bind-html='item.link'></span>
+        </md-content>
+        <div class="md-actions" layout="row">
+            <md-button ng-click="ok()" class="md-primary">
+                ok
+            </md-button>
+        </div>
+    </md-dialog>
+</script>

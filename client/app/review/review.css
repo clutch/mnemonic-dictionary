@@ -1,0 +1,39 @@
+#review input{
+	width:250px;
+}
+#review .screen-header {
+    margin-left: 80px;
+}
+
+#grade .screen-header {
+    margin-left: 80px;
+}
+
+.md-tile-content.reviewing{
+    padding: 20px;
+    margin-top: -20px;
+}
+
+#grade .item-content{
+    padding:15px;
+}
+
+#grade .md-tile-left{
+    display: inline-block;
+}
+
+#grade .md-tile-content{
+    display: inline-block;
+}
+
+#grade .md-tile-right{
+    display: inline-block;
+}
+
+#grade .item-content-layout > div{
+    padding-left:25px;
+}
+
+md-dialog.md-transition-in{
+    padding:20px;
+}
